@@ -1,0 +1,317 @@
+.dashboard-doctor {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    padding: 2rem;
+  }
+  
+  .dashboard-header {
+    background: linear-gradient(to right, var(--primary-black), var(--secondary-black));
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-info h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: black;
+  }
+  
+  .especialidad {
+    color: #e5e7eb;
+    margin-top: 0.5rem;
+    color: black;
+
+  }
+  
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  /* Calendario */
+  .doctor-calendar {
+    width: 100%;
+    border: none !important;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+  }
+  
+  .fecha-seleccionada {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  /* Lista de Citas */
+  .lista-citas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .cita-card {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-left: 4px solid var(--primary-red);
+  }
+  
+  .cita-info {
+    display: grid;
+    gap: 0.5rem;
+  }
+  
+  .paciente-nombre {
+    font-weight: 600;
+    color: var(--primary-blue);
+  }
+  
+  .cita-hora {
+    color: var(--text-gray);
+  }
+  
+  .cita-estado {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+  }
+  
+  .cita-estado.pendiente {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
+  .cita-estado.confirmada {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  .cita-estado.cancelada {
+    background: #f8d7da;
+    color: #721c24;
+  }
+  
+  .cita-acciones {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .cita-acciones button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-confirmar {
+    background: #38a169;
+    color: white;
+    border: none;
+  }
+  
+  .btn-confirmar:hover {
+    background: #2f855a;
+  }
+  
+  .btn-cancelar {
+    background: #e53e3e;
+    color: white;
+    border: none;
+  }
+  
+  .btn-cancelar:hover {
+    background: #c53030;
+  }
+  
+  .btn-notas {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+  }
+  
+  .btn-notas:hover {
+    background: var(--secondary-blue);
+  }
+  
+  /* Modal de Notas */
+  .modal-notas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-content h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+  }
+  
+  .modal-content textarea {
+    width: 100%;
+    height: 150px;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    resize: vertical;
+    font-family: inherit;
+  }
+  
+  .modal-content textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+  }
+  
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+  
+  .modal-actions button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .btn-guardar {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+  }
+  
+  .btn-guardar:hover {
+    background: var(--secondary-blue);
+  }
+  
+  .loading, .no-citas {
+    text-align: center;
+    color: var(--text-gray);
+    padding: 2rem;
+  }
+  
+  .mensaje {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease-out;
+    z-index: 1100;
+  }
+  
+  .mensaje.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .mensaje.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-doctor {
+      padding: 1rem;
+    }
+  
+    .dashboard-header {
+      padding: 1.5rem;
+    }
+  
+    .doctor-info h1 {
+      font-size: 1.5rem;
+    }
+  
+    .cita-acciones {
+      flex-direction: column;
+    }
+  
+    .cita-acciones button {
+      width: 100%;
+    }
+  
+    .modal-content {
+      width: 95%;
+      padding: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dashboard-header {
+      padding: 1rem;
+    }
+  
+    .card {
+      padding: 1rem;
+    }
+  
+    .cita-card {
+      padding: 1rem;
+    }
+  }

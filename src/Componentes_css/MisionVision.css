@@ -1,0 +1,141 @@
+.mision-vision-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .mision-vision-container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                      url('/Imagen/Fond2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mision-vision-content {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .text-section {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .mision-section,
+  .vision-section {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  .mision-vision-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .text-section {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .mision-section,
+  .vision-section {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .mision-section:hover,
+  .vision-section:hover {
+    transform: translateY(-5px);
+  }
+  
+  h2 {
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    position: relative;
+    font-weight: bold;
+  }
+  
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 70px;
+    height: 3px;
+    background-color: var(--secondary-blue);
+  }
+  
+  p {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .mision-vision-content {
+      padding: 3rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .text-section {
+      gap: 2rem;
+    }
+  
+    .mision-section,
+    .vision-section {
+      padding: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.8rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .mision-vision-content {
+      padding: 2rem 1rem;
+    }
+    
+    .mision-section,
+    .vision-section {
+      padding: 1.5rem;
+    }
+  }

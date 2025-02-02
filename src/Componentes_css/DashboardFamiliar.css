@@ -1,0 +1,235 @@
+.dashboard-familiar {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    padding: 2rem;
+  }
+  
+  .dashboard-header {
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+  }
+  
+  .dashboard-header p {
+    margin: 0;
+    opacity: 0.9;
+  }
+  
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    color: var(--primary-blue);
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+  }
+  
+  /* Progreso Card */
+  .progreso-card {
+    grid-column: 1 / -1;
+  }
+  
+  .progreso-container {
+    margin-bottom: 2rem;
+  }
+  
+  .progreso-barra-container {
+    width: 100%;
+    height: 20px;
+    background-color: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  
+  .progreso-barra {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+    transition: width 0.3s ease;
+  }
+  
+  .progreso-texto {
+    text-align: center;
+    color: var(--text-gray);
+    font-weight: 500;
+  }
+  
+  .estadisticas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .estadistica-item {
+    text-align: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+  }
+  
+  .estadistica-item h3 {
+    color: var(--text-gray);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .estadistica-item p {
+    color: var(--primary-blue);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Notas Card */
+  .notas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nota-item {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-blue);
+  }
+  
+  .nota-fecha {
+    color: var(--text-gray);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .nota-contenido {
+    color: var(--text-gray);
+    line-height: 1.5;
+  }
+  
+  /* Citas Card */
+  .citas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .cita-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+  }
+  
+  .cita-fecha {
+    color: var(--text-gray);
+    font-weight: 500;
+  }
+  
+  .cita-estado {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .cita-estado.pendiente {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
+  .cita-estado.completada {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  .cita-estado.cancelada {
+    background: #f8d7da;
+    color: #721c24;
+  }
+  
+  .loading {
+    text-align: center;
+    color: var(--text-gray);
+    padding: 2rem;
+    font-size: 1.25rem;
+  }
+  
+  .error-message {
+    text-align: center;
+    color: #721c24;
+    background: #f8d7da;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 2rem;
+  }
+  
+  .no-notas,
+  .no-citas {
+    text-align: center;
+    color: var(--text-gray);
+    padding: 2rem;
+  }
+  
+  @media (max-width: 1024px) {
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+  
+    .progreso-card {
+      grid-column: auto;
+    }
+  
+    .estadisticas {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-familiar {
+      padding: 1rem;
+    }
+  
+    .dashboard-header {
+      padding: 1.5rem;
+    }
+  
+    .dashboard-header h1 {
+      font-size: 1.5rem;
+    }
+  
+    .card {
+      padding: 1.5rem;
+    }
+  
+    .estadisticas {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cita-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }

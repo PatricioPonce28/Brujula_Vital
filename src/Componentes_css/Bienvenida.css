@@ -1,0 +1,237 @@
+.bienvenida-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(8, 8, 8, 0.8)), 
+                    url('../../public/Imagen/Fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.video-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto 0;
+  position: relative;
+  padding-bottom: 56.25%; /* Aspecto 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.youtube-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+/* Ajuste responsive para el video */
+@media (max-width: 768px) {
+  .video-container {
+    margin-top: 2rem;
+  }
+}
+
+/* Ajuste responsive para el video */
+@media (max-width: 768px) {
+  .video-container {
+    margin-top: 2rem;
+  }
+}
+
+  .content-wrapper {
+    max-width: 1200px;
+    width: 90%;
+    margin: 2rem auto;
+    text-align: center;
+  }
+  
+  .main-title {
+    color: #8B4513;
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .slogan {
+    color: #666;
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+  
+  .buttons-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .action-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .login-btn {
+    background-color: #8B4513;
+    color: white;
+  }
+  
+  .login-btn:hover {
+    background-color: #6d3610;
+  }
+  
+  .register-btn {
+    background-color: #2f855a;
+    color: white;
+  }
+  
+  .register-btn:hover {
+    background-color: #276749;
+  }
+  
+  /* Estilos del Modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+  }
+  
+  .roles-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .role-button {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #8B4513;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .role-button:hover {
+    background-color: #6d3610;
+  }
+  
+  .role-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .close-button {
+    padding: 0.5rem 1rem;
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  /* Estilos del Formulario de Login */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    color: #4a5568;
+  }
+  
+  .form-group input {
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .submit-button {
+    padding: 1rem;
+    background-color: #8B4513;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  
+  .submit-button:hover {
+    background-color: #6d3610;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .main-title {
+      font-size: 2.5rem;
+    }
+  
+    .slogan {
+      font-size: 1.5rem;
+    }
+  
+    .buttons-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .roles-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-title {
+      font-size: 2rem;
+    }
+  
+    .slogan {
+      font-size: 1.2rem;
+    }
+  
+    .modal-content {
+      padding: 1.5rem;
+    }
+  }

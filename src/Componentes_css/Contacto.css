@@ -1,0 +1,120 @@
+.contacto-container {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%);
+}
+
+.contacto-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contacto-title {
+    color: #9d174d;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.contacto-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #ec4899;
+    margin: 1rem auto;
+    border-radius: 2px;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.map-container {
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .map {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+  }
+
+@media (min-width: 768px) {
+    .contacto-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.contacto-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contacto-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    color: #9d174d;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: #4b5563;
+}
+
+.contact-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    color: #ec4899;
+}
+
+.contact-link {
+    color: #4b5563;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #ec4899;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    color: #4b5563;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #ec4899;
+    transform: translateX(5px);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+}
