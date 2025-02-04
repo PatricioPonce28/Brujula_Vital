@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import '../Componentes_css/Registro.css'; 
+import { auth, db } from '../firebase/config';
+import { collection, query, where, getDocs, addDoc, setDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import '../Componentes_css/Registro.css';
 
 const Registro = () => {
   const navigate = useNavigate();
@@ -17,13 +20,12 @@ const Registro = () => {
     nombre: '',
     apellido: '',
     telefono: '',
-    // Campos específicos para cada rol
-    especialidad: '',       // Para doctores
-    licenciaMedica: '',    // Para doctores
-    condicionMedica: '',   // Para pacientes
-    fechaNacimiento: '',   // Para pacientes
-    parentesco: '',        // Para familiares
-    pacienteEmail: ''      // Para familiares
+    especialidad: '',
+    licenciaMedica: '',
+    condicionMedica: '',
+    fechaNacimiento: '',
+    parentesco: '',
+    pacienteEmail: ''
   });
 
   const handleChange = (e) => {
@@ -36,6 +38,49 @@ const Registro = () => {
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
     setError('');
+  };
+
+  const handleRegister = async (role, userData) => {
+    try {
+      if (role === 'familiar') {
+        // Verificar que existe el paciente
+        const pacientesQuery = query(
+          collection(db, 'users'),
+          where('email', '==', userData.pacienteEmail),
+          where('role', '==', 'paciente')
+        );
+        const pacienteSnapshot = await getDocs(pacientesQuery);
+        
+        if (pacienteSnapshot.empty) {
+          throw new Error('No se encontró el paciente con ese correo');
+        }
+
+        const pacienteId = pacienteSnapshot.docs[0].id;
+
+        // Crear el usuario familiar
+        const familiarCredential = await createUserWithEmailAndPassword(auth, userData.email, userData.password);
+        
+        // Guardar datos del familiar
+        await setDoc(doc(db, 'users', familiarCredential.user.uid), {
+          ...userData,
+          role: 'familiar'
+        });
+
+        // Crear la relación familiar-paciente
+        await addDoc(collection(db, 'relaciones'), {
+          familiarId: familiarCredential.user.uid,
+          pacienteId: pacienteId,
+          tipo: 'familiar_paciente',
+          createdAt: serverTimestamp()
+        });
+
+        return familiarCredential.user;
+      }
+      return null;
+    } catch (error) {
+      console.error('Error en registro:', error);
+      throw error;
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -53,12 +98,12 @@ const Registro = () => {
       setError('');
       setLoading(true);
 
-      // Preparar datos específicos según el rol
       const userData = {
         nombre: formData.nombre,
         apellido: formData.apellido,
         telefono: formData.telefono,
         role: selectedRole,
+        email: formData.email
       };
 
       switch (selectedRole) {
@@ -74,10 +119,17 @@ const Registro = () => {
           userData.parentesco = formData.parentesco;
           userData.pacienteEmail = formData.pacienteEmail;
           break;
+        default:
+          break;
       }
 
-      await signup(formData.email, formData.password, selectedRole, userData);
-      navigate('/'); // O redirigir al dashboard correspondiente
+      if (selectedRole === 'familiar') {
+        await handleRegister(selectedRole, { ...userData, password: formData.password });
+      } else {
+        await signup(formData.email, formData.password, selectedRole, userData);
+      }
+
+      navigate('/');
     } catch (error) {
       setError('Error al crear la cuenta: ' + error.message);
     } finally {
@@ -92,7 +144,6 @@ const Registro = () => {
         
         {error && <div className="error-message">{error}</div>}
 
-        {/* Selección de Rol */}
         <div className="role-selection">
           <h3>Seleccione su rol:</h3>
           <div className="role-buttons">
@@ -121,7 +172,6 @@ const Registro = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="registro-form">
-          {/* Campos comunes */}
           <div className="form-group">
             <label>Correo Electrónico</label>
             <input
@@ -190,7 +240,6 @@ const Registro = () => {
             />
           </div>
 
-          {/* Campos específicos según el rol */}
           {selectedRole === 'doctor' && (
             <>
               <div className="form-group">
@@ -243,7 +292,7 @@ const Registro = () => {
           {selectedRole === 'familiar' && (
             <>
               <div className="form-group">
-                <label>Parentesco con el Paciente</label>
+                <label>Parentesco</label>
                 <input
                   type="text"
                   name="parentesco"

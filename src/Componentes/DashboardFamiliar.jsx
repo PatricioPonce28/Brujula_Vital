@@ -22,11 +22,18 @@ const DashboardFamiliar = () => {
 
   useEffect(() => {
     const cargarDatosPaciente = async () => {
+      if (!currentUser) {
+        setLoading(false);
+        return;
+      }
+
       try {
-        // Primero obtenemos la relación familiar-paciente
+        // Buscar la relación del familiar con el paciente
         const relacionesRef = collection(db, 'relaciones');
-        const q = query(relacionesRef, 
-          where('familiarId', '==', currentUser.uid)
+        const q = query(
+          relacionesRef,
+          where('familiarId', '==', currentUser.uid),
+          where('tipo', '==', 'familiar_paciente')
         );
         const relacionSnapshot = await getDocs(q);
 
@@ -36,35 +43,44 @@ const DashboardFamiliar = () => {
           return;
         }
 
-        const relacion = relacionSnapshot.docs[0].data();
-        const pacienteId = relacion.pacienteId;
+        // Obtener el ID del paciente de la relación
+        const pacienteId = relacionSnapshot.docs[0].data().pacienteId;
 
-        // Obtener información del paciente
+        // Obtener los datos del paciente
         const pacienteDoc = await getDoc(doc(db, 'users', pacienteId));
-        if (pacienteDoc.exists()) {
-          setPacienteInfo(pacienteDoc.data());
+        if (!pacienteDoc.exists()) {
+          setError('No se encontró la información del paciente');
+          setLoading(false);
+          return;
         }
+        setPacienteInfo(pacienteDoc.data());
 
         // Obtener citas del paciente
         const citasRef = collection(db, 'citas');
         const citasQuery = query(citasRef, where('pacienteId', '==', pacienteId));
         const citasSnapshot = await getDocs(citasQuery);
-        const citas = citasSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-          fecha: doc.data().fecha.toDate()
-        }));
+        const citas = citasSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            ...data,
+            fecha: data.fecha?.toDate() || new Date() // Manejo seguro de fechas
+          };
+        });
         setCitasHistorial(citas);
 
         // Obtener notas del doctor
         const notasRef = collection(db, 'notas_pacientes');
         const notasQuery = query(notasRef, where('pacienteId', '==', pacienteId));
         const notasSnapshot = await getDocs(notasQuery);
-        const notas = notasSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-          fecha: doc.data().fecha.toDate()
-        }));
+        const notas = notasSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            ...data,
+            fecha: data.fecha?.toDate() || new Date() // Manejo seguro de fechas
+          };
+        });
         setNotasDoctor(notas);
 
         // Calcular progreso basado en citas completadas
@@ -74,7 +90,7 @@ const DashboardFamiliar = () => {
 
       } catch (error) {
         console.error('Error al cargar datos:', error);
-        setError('Error al cargar la información del paciente');
+        setError('Error al cargar la información del paciente: ' + error.message);
       } finally {
         setLoading(false);
       }
@@ -95,7 +111,9 @@ const DashboardFamiliar = () => {
     <div className="dashboard-familiar">
       <div className="dashboard-header">
         <h1>Portal Familiar</h1>
-        <p>Seguimiento del paciente: {pacienteInfo?.nombre} {pacienteInfo?.apellido}</p>
+        {pacienteInfo && (
+          <p>Seguimiento del paciente: {pacienteInfo.nombre} {pacienteInfo.apellido}</p>
+        )}
       </div>
 
       <div className="dashboard-content">
